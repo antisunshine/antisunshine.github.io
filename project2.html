@@ -31,19 +31,88 @@
 				<!-- Main -->
 					<section id="main" class="wrapper">
 						<div class="inner">
-							<h1 class="major">A Derpa Herp</h1>
+							<h1 class="major">Sudoku</h1>
 							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<p>A project that checks every grid, row and colum of a sudoku and rerurns true if sudoku is filled right.</p>
 					<h3>Code</h3>
 						<pre>
-							<code>i = 0;
-while (!deck.isInOrder()) {
-	print 'Iteration ' + i;
-	deck.shuffle();
-	i++;
-}
-print 'It took ' + i + ' iterations to sort the deck.';</code>
+							<code>def rivi_oikein(sudoku: list, rivi: int):
+	sudokuRivi = sudoku[rivi]
+	rivi2 = []
+	for alkio in sudokuRivi:
+		if alkio == 0:
+			continue
+		else:
+		rivi2.append(alkio)
+	if len(rivi2) != len(set(rivi2)):
+		return False
+	else:
+		return True
+							
+def sarake_oikein(sudoku: list, rivi: int):
+	rivi2 = []
+	for i in range(len(sudoku)):
+		if sudoku[i][rivi] > 0:
+			rivi2.append(sudoku[i][rivi])
+		if len(rivi2) != len(set(rivi2)):
+			return False
+		else:
+			return True
+							
+def nelio_oikein(sudoku: list, rivi_nro: int, sarake_nro: int):
+	nelio = []
+	nelio2 = []
+	for i in range(3):
+		rivi = sudoku[rivi_nro]
+		nelio.append(rivi[sarake_nro:sarake_nro + 3])
+		rivi_nro += 1
+		for alkio in nelio:
+			for nro in alkio:
+				if nro > 0:
+					nelio2.append(nro)
+		if len(nelio2) != len(set(nelio2)):
+				return False
+			else:
+				return True
+							
+def sudoku_oikein(sudoku: list):
+	riviO = True
+	sarakeO = True
+	nelioO = True
+	nelio_tarkastus = [[0, 0], [0, 3], [0, 6], [3, 0], [3, 3], [3, 6], [6, 0], [6, 3], [6, 6]]
+	for i in range(len(sudoku)):
+		if rivi_oikein(sudoku, i) == False:
+			riviO = False
+			break
+	for i in range(len(sudoku)):
+		if sarake_oikein(sudoku, i) == False:
+			sarakeO = False
+			break
+	for i in range(len(nelio_tarkastus)):
+		if nelio_oikein(sudoku, nelio_tarkastus[i][0], nelio_tarkastus[i][1]) == False:
+			nelioO = False
+			break
+							
+	if riviO == True and sarakeO == True and nelioO == True:
+		return True
+	else:
+		return False
+							
+if __name__ == "__main__":
+					
+	sudoku1 = [
+	[ 2, 6, 7, 8, 3, 9, 5, 0, 4 ],
+	[ 9, 0, 3, 5, 1, 0, 6, 0, 0 ],
+	[ 0, 5, 6, 0, 0, 0, 8, 3, 9 ],
+	[ 5, 1, 9, 0, 4, 6, 3, 2, 8 ],
+	[ 8, 0, 2, 1, 0, 5, 7, 0, 6 ],
+	[ 6, 7, 4, 3, 2, 0, 0, 0, 5 ],
+	[ 0, 0, 0, 4, 5, 7, 2, 6, 3 ],
+	[ 3, 2, 0, 0, 8, 0, 0, 5, 7 ],
+	[ 7, 4, 5, 0, 0, 3, 9, 0, 1 ],
+	]
+							
+print(sudoku_oikein(sudoku1))</code>
 					</pre>
 				</section>
 			</div>
