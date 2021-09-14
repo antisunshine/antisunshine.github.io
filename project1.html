@@ -33,16 +33,46 @@
 						<div class="inner">
 							<h1 class="major">A herpa derp</h1>
 							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<p>A program that asks for id no and amount, repating as many times as the user requires and lastly prints out the whole inventory.</p>
 							<pre>
-								<code>i = 0;
-while (!deck.isInOrder()) {
-	print 'Iteration ' + i;
-	deck.shuffle();
-	i++;
-}
-print 'It took ' + i + ' iterations to sort the deck.';</code>
+								<code>#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char answer = 'Y';
+    int amount = 0, nro = 0;
+    int varasto[501]={0};
+
+    while(answer == 'Y' || answer == 'y'){
+      cout << "Anna tuotenumero: 1 - 500 " << endl;
+      cin >> nro;
+      if(cin.fail()){
+        cin.clear();
+        cin.ignore(1000,'\n');
+        cout << "Tarkista syöte. Syötä numero." << endl;
+      } else if (nro < 1 || nro > 500){
+        cout << "Tarkista tuotenumero:" << endl;
+        cin >> nro;
+      } else {
+      cout << "Anna m\x84\x84r\x84: " << endl;
+      cin >> amount;
+
+      varasto[nro] = amount;
+
+      cout << "Lis\x84t\x84\x84nk\x94 toinen tuote? Y/N" << endl;
+      cin >> answer;
+      }
+    }
+
+    for(int i = 1 ; i <= 500; i++){
+      if(varasto[i] > 0)
+      cout << "Tuote nro " << i << ": " << varasto[i] << " kpl" << endl;
+    }
+
+    return 0;
+}</code>
 						</pre>
 						</div>
 					</section>
